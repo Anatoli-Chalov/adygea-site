@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — Наследие Черкесов</title>
+    <style>
+        :root {
+            --bg-color: #0b0f0e;
+            --card-bg: #121816;
+            --accent-color: #e5b842;
+            --text-main: #e0e0e0;
+            --text-muted: #94a3b8;
+            --border-color: rgba(229, 184, 66, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        header {
+            background: rgba(5, 7, 6, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--accent-color);
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            color: #fff;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Основной контент */
+        .contacts-section {
+            padding: 20px 0 60px;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-card h3 {
+            color: var(--accent-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p, .contact-card ul {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .contact-card ul {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .contact-card ul li {
+            margin-bottom: 8px;
+        }
+
+        .contact-card ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Блок с играми и RuStore */
+        .games-section {
+            max-width: 1000px;
+            margin: 40px auto 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .games-section h3 {
+            color: var(--accent-color);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .games-section p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rustore-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Картинки-заглушки для ссылок на игры */
+        .rustore-badge {
+            display: inline-block;
+            width: 200px;
+            height: 60px;
+            background: #1a221f;
+            border: 1px dashed var(--accent-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .rustore-badge:hover {
+            background: rgba(229, 184, 66, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Подвал */
+        footer {
+            background: #050706;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Мобильная адаптивность */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+                gap: 10px;
+            }
+            .nav-menu {
+                justify-content: center;
+                gap: 12px;
+            }
+            .page-title {
+                font-size: 24px;
+            }
+            .games-section {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">КОНТАКТЫ</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная страница</a></li>
+                <li><a href="heritage.html">Страница наследие адыгов</a></li>
+                <li><a href="tours.html">Туры по Адыгее</a></li>
+                <li><a href="khabze.html">Законы ХАБЗЭ</a></li>
+                <li><a href="contacts.html" class="active">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Заголовок -->
+    <section class="page-header">
+        <h1 class="page-title">Свяжитесь с нами</h1>
+        <p class="page-subtitle">Мы всегда открыты к общению, вопросам и сотрудничеству</p>
+    </section>
+
+    <!-- Основной блок с контактами -->
+    <section class="contacts-section">
+        <div class="container">
+            <div class="contacts-grid">
+                
+                <div class="contact-card">
+                    <h3>Наши координаты</h3>
+                    <p>Если у вас есть вопросы по проекту, предложения или вы хотите организовать тур, пишите нам на электронную почту.</p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Email:</strong> <a href="mailto:mggtk@mail.ru">mggtk@mail.ru</a></li>
+                        <li><strong>Адрес:</strong> Республика Адыгея, г. Майкоп, ул. Солнечная, д. 60</li>
+                    </ul>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Социальные сети</h3>
+                    <p>Следите за нашими обновлениями, новыми маршрутами и материалами о культуре в официальных сообществах:</p>
+                    <ul>
+                        <li><a href="https://vk.ru/mggtk_professionalitet" target="_blank">&rarr; ВКонтакте</a></li>
+                        <li><a href="https://t.me/mggtk_professionalitet" target="_blank">&rarr; Telegram-канал</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Блок с играми и заглушками RuStore -->
+            <div class="games-section">
+                <h3>Поддержите наши проекты</h3>
+                <p>Мы также разрабатываем интерактивные мобильные приложения и игры, посвященные истории и культуре региона. Оцените наши работы и скачайте их в официальном магазине приложений:</p>
+                
+                <div class="rustore-buttons">
+                    <!-- Заглушка для первой игры -->
+                    <a href="#" class="rustore-badge" target="_blank">
+                        [ Игра 1 в RuStore ]
+                    </a>
+                    
+                    <!-- Заглушка для второй игры -->
+                    <a href="#" class="rustore-badge" target="_blank">
+                        [ Игра 2 в RuStore ]
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Наследие Черкесов. Все права защищены.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

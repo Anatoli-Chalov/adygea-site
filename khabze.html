@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Законы ХАБЗЭ — Наследие Черкесов</title>
+    <style>
+        :root {
+            --bg-color: #050806;
+            --surface-color: #0b120d;
+            --surface-light: #121f17;
+            --gold-color: #e5b842;    
+            --gold-light: #fff0b3;
+            --text-color: #f5f9f6;
+            --text-muted: #96a89e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .ethnic-pattern {
+            background-image: radial-gradient(var(--surface-light) 1px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.15;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Шапка со ссылками строго по вашим файлам */
+        header {
+            background-color: rgba(5, 8, 6, 0.98);
+            position: fixed;
+            width: 100%;
+            top: 0; left: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(229, 184, 66, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold-color);
+        }
+
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            flex-wrap: wrap; 
+            justify-content: flex-end; 
+            gap: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover { color: var(--gold-color); }
+        nav ul li a.active { color: var(--gold-color); }
+
+        /* Основной контент */
+        .hero {
+            padding: 140px 0 60px 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, rgba(5,8,6,0.2) 0%, var(--bg-color) 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .hero h1 span { color: var(--gold-color); }
+
+        .hero-intro {
+            background: var(--surface-color);
+            border-left: 4px solid var(--gold-color);
+            padding: 25px;
+            margin: 30px auto 0;
+            max-width: 900px;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .hero-intro p {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
+        }
+        .divider svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--gold-color);
+            margin: 0 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title span { color: var(--gold-color); }
+
+        /* Сетка карточек */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .rule-card {
+            background: var(--surface-color);
+            border: 1px solid rgba(229, 184, 66, 0.2);
+            border-radius: 8px;
+            padding: 35px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rule-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--gold-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px rgba(229, 184, 66, 0.15);
+        }
+
+        .rule-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .rule-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+            fill: var(--gold-color);
+            transition: transform 0.4s ease;
+        }
+
+        .rule-card:hover .rule-icon {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 8px rgba(229, 184, 66, 0.4));
+        }
+
+        .rule-title {
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .rule-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .rule-click-hint {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--gold-color);
+            border: 1px solid rgba(229, 184, 66, 0.5);
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .rule-card:hover .rule-click-hint {
+            opacity: 1;
+            background: rgba(229, 184, 66, 0.1);
+        }
+
+        /* Интеграция */
+        .integration-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .integration-item {
+            background: var(--surface-color);
+            border: 1px solid rgba(229, 184, 66, 0.15);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .integration-item h4 {
+            color: var(--gold-color);
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .integration-item ul {
+            margin-left: 20px;
+            color: #e0e8e4;
+        }
+
+        .integration-item ul li {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .conclusion {
+            background: rgba(229, 184, 66, 0.05);
+            border: 1px solid rgba(229, 184, 66, 0.3);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .conclusion p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--gold-light);
+        }
+
+        /* Модальные окна */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 4, 3, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--surface-color);
+            border: 1px solid var(--gold-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--gold-color);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(229, 184, 66, 0.2);
+        }
+
+        .modal-title {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            color: var(--gold-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+            color: #e0e8e4;
+            text-align: justify;
+            font-size: 16px;
+        }
+
+        .quote-block {
+            background: rgba(229, 184, 66, 0.05);
+            border-left: 4px solid var(--gold-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 15px;
+        }
+
+        footer {
+            background-color: #020403;
+            padding: 30px 0;
+            border-top: 1px solid rgba(229, 184, 66, 0.3);
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media(max-width: 900px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            nav ul { justify-content: center; gap: 15px; }
+        }
+        @media(max-width: 768px) {
+            .hero { padding-top: 140px; }
+            .hero h1 { font-size: 26px; }
+            .modal-content { padding: 25px; }
+            .conclusion { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ethnic-pattern"></div>
+
+    <!-- Точная навигация по вашим файлам -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Наследие Черкесов</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="heritage.html">Наследие адыгов</a></li>
+                    <li><a href="tours.html">Туры по Адыгее</a></li>
+                    <li><a href="khabze.html" class="active">Законы ХАБЗЭ</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Кодекс Чести: <span>Адыгэ Хабзэ</span></h1>
+            
+            <div class="hero-intro">
+                <p>В XXI веке человечество столкнулось с беспрецедентным процессом унификации культуры. Глобализация стирает границы не только между экономиками, но и между уникальными этическими системами. Для адыгского (черкесского) народа сохранение <strong>Адыгэ Хабзэ</strong> — это не просто дань традиции, а вопрос выживания национальной идентичности.</p>
+                <p style="margin-top: 15px;">Патриотизм сегодня — это не формальная преданность государственным символам, а внутренняя дисциплина духа. Адыгэ Хабзэ выступает как «иммунная система» народа, позволяющая молодежи впитывать достижения цивилизации, не теряя своего этического стержня.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="divider"><svg viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z M50 25 L75 50 L50 75 L25 50 Z" /></svg></div></div>
+
+    <section class="container">
+        <h2 class="section-title">Столпы и <span>правила</span></h2>
+        
+        <div class="rules-grid">
+            <div class="rule-card" data-modal="modal-1">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <div class="rule-title">ЦIыфыгъэ</div>
+                <div class="rule-subtitle">Человечность</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-2">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                <div class="rule-title">Напэ</div>
+                <div class="rule-subtitle">Честь</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-3">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+                <div class="rule-title">Нэмыс</div>
+                <div class="rule-subtitle">Почтительность и совесть</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-4">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+                <div class="rule-title">ЛIыгъэ</div>
+                <div class="rule-subtitle">Мужество</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-5">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z"/></svg>
+                <div class="rule-title">Акъыл</div>
+                <div class="rule-subtitle">Разум</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-6">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+                <div class="rule-title">Тхьэмадэ</div>
+                <div class="rule-subtitle">Почитание старших</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-7">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                <div class="rule-title">ШIыхьаф</div>
+                <div class="rule-subtitle">Взаимопомощь</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+
+            <div class="rule-card" data-modal="modal-8">
+                <svg class="rule-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <div class="rule-title">Гостеприимство</div>
+                <div class="rule-subtitle">Пщыхьэщхьэ гуапэ</div>
+                <div class="rule-click-hint">Подробнее</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><div class="divider"><svg viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z M50 25 L75 50 L50 75 L25 50 Z" /></svg></div></div>
+
+    <section class="container">
+        <h2 class="section-title">Язык как архитектура <span>мышления</span></h2>
+        <div style="background: var(--surface-color); padding: 30px; border-radius: 8px; border: 1px solid rgba(229, 184, 66, 0.15); margin-bottom: 50px;">
+            <p style="font-size: 16px; color: #e0e8e4; text-align: justify; margin-bottom: 15px;">Патриотическое воспитание невозможно без <strong>Адыгэбзэ</strong>. Язык — это не просто инструмент коммуникации, это архитектура мышления. Многие понятия Хабзэ непереводимы, и потеря языка означает потерю нюансов этикета. Например, формы приветствия в адыгском языке уже содержат в себе пожелание мира и признание статуса собеседника.</p>
+            <p style="font-size: 16px; color: #e0e8e4; text-align: justify;">Язык позволяет молодежи обращаться к первоисточникам — нартскому эпосу, пословицам и песням, где зашифрованы алгоритмы поведения в кризисных ситуациях. Патриотизм без языка становится беззвучным и быстро теряется.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Интеграция в современную <span>среду</span></h2>
+        
+        <div class="integration-list">
+            <div class="integration-item">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <svg style="width: 28px; height: 28px; fill: var(--gold-color); flex-shrink: 0;" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                    <h4 style="margin: 0;">Образование и просвещение</h4>
+                </div>
+                <ul>
+                    <li>Включение разделов Хабзэ в учебные планы от детских садов до университетов (практическое обсуждение моральных дилемм).</li>
+                    <li>Открытие образовательных учреждений по прототипу этнолагеря с углубленным изучением языка, истории, ремесел, танцев и игр.</li>
+                </ul>
+            </div>
+            
+            <div class="integration-item">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <svg style="width: 28px; height: 28px; fill: var(--gold-color); flex-shrink: 0;" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3m0 3.84c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3M6 18v-1.5c0-1.66 2.69-3 6-3s6 1.34 6 3V18H6Z"/></svg>
+                    <h4 style="margin: 0;">Конгломерат (Организация)</h4>
+                </div>
+                <ul>
+                    <li>Объединение структур под руководством Государственного Совета-Хасэ РА.</li>
+                    <li>Просветительские встречи с выдающимися деятелями, репатриантами и героями.</li>
+                    <li>Проведение международных мероприятий и фестивалей в традиционном стиле (К1апщ, Чэс дэс, Зек1о).</li>
+                    <li>Предоставление грантов для реализации проектов по сохранению культуры.</li>
+                </ul>
+            </div>
+
+            <div class="integration-item">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <svg style="width: 28px; height: 28px; fill: var(--gold-color); flex-shrink: 0;" viewBox="0 0 24 24"><path d="M19.03 7.39l1.42-1.42c-.45-.51-.97-.97-1.42-1.42l-1.41 1.41C16.16 5.37 14.16 5 12 5s-4.16.37-5.62 1.04L4.96 4.63C4.51 5.08 3.99 5.54 3.54 6.05l1.42 1.42C3.89 8.94 3 10.87 3 13c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.13-.89-4.06-2.97-5.61M12 20c-3.87 0-7-3.13-7-7 0-1.66.59-3.18 1.57-4.38L12 14.15l5.43-5.53C18.41 9.82 19 11.34 19 13c0 3.87-3.13 7-7 7z"/></svg>
+                    <h4 style="margin: 0;">Спорт и единоборства</h4>
+                </div>
+                <ul>
+                    <li>Использование этикета Хабзэ в секциях для воспитания благородства.</li>
+                    <li>Кружки по джигитовке, конные состязания и скачки (шыгъачъэ).</li>
+                    <li>Адыгские игры: Чынэеу (волчок), Шэк1ощэрыз (меткий стрелок), Чэтэзэпэ1удз (фехтование), Хьамлащэ (катание).</li>
+                </ul>
+            </div>
+
+            <div class="integration-item">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <svg style="width: 28px; height: 28px; fill: var(--gold-color); flex-shrink: 0;" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-5-2h2v-2h-2v2zm0-4h2V8h-2v5z"/></svg>
+                    <h4 style="margin: 0;">Медиа-пространство</h4>
+                </div>
+                <ul>
+                    <li>Создание качественного контента (кино, блоги, графика), делающего следование Хабзэ «модным» среди подростков.</li>
+                    <li>Использование родного языка в сленге и общении в социальных сетях.</li>
+                </ul>
+            </div>
+
+            <div class="integration-item">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                    <svg style="width: 28px; height: 28px; fill: var(--gold-color); flex-shrink: 0;" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
+                    <h4 style="margin: 0;">Национальная мода и Секции</h4>
+                </div>
+                <ul>
+                    <li>Лекции о значении, символике и популяризации национальной одежды. Курсы по золотошвейному искусству.</li>
+                    <li>Клубы по гончарному и кузнечному ремеслу, оружейному делу, где молодежь может делиться опытом.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+        <div class="conclusion">
+            <p><strong>Адыгэ Хабзэ — это не оковы прошлого, это компас для будущего.</strong> Человек с твердыми моральными ориентирами не боится перемен. Глобализация для него становится возможностью представить миру свою уникальную культуру.</p>
+            <p>Хабзэ — это не то, что мы изучаем по книгам, это то, как мы дышим. Быть адыгом — значит нести ответственность за каждого, кто жил до тебя, и за каждого, кто родится после. В этом и заключается истинный, живой патриотизм!</p>
+        </div>
+    </section>
+
+    <!-- Модальные окна -->
+    <div class="modal-overlay" id="modal-1">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">ЦIыфыгъэ</div></div>
+            <div class="modal-body">
+                <p>Центральным понятием Хабзэ является ЦIыфыгъэ (Человечность).</p>
+                <p>В эпоху потребления, где ценность человека часто измеряется его капиталом, Хабзэ утверждает обратное: человек ценен своей способностью к сопереживанию, состраданию к ближнему и самоограничению.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-2">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">Напэ</div></div>
+            <div class="modal-body">
+                <p>Приоритет духа над материей: воспитание начинается с понимания, что честь (Напэ) дороже жизни и достатка. Это формирует правильность в выборе действий, стойкость к коррупции, предательству и малодушию.</p>
+                <div class="quote-block">«Честь для адыга — это всё. Лишиться её — значит перестать существовать в глазах общества» — Хан-Гирей.</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-3">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">Нэмыс</div></div>
+            <div class="modal-body">
+                <p>Намыс (совесть и почтительность) — это регулятор поведения, который работает изнутри, а не под внешним давлением.</p>
+                <p>Человек поступает правильно не потому, что за ним следят, а потому, что он не может поступить иначе.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-4">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">ЛIыгъэ</div></div>
+            <div class="modal-body">
+                <p>ЛIыгъэ (Мужество): в современном контексте это не только физическая сила, но и интеллектуальная смелость. Умение брать на себя ответственность за судьбу семьи, аула и республики — вот высшее проявление мужества для молодого поколения.</p>
+                <p>Нартский кодекс гласит: «Если ты силен — помоги слабому, если ты мудр — научи несведущего». Подобно образу Саусырыкъо, чье мужество — это не только сила, но и хитрость во благо народа.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-5">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">Акъыл</div></div>
+            <div class="modal-body">
+                <p>Акъыл (Разум) — это сдержанность и самоконтроль. Хабзэ учит подавлять гнев, быть лаконичным в речи и рациональным в принятиях решений.</p>
+                <p>В мире информационного шума и эмоциональной распущенности такая дисциплина ума становится важнейшим преимуществом.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-6">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">Тхьэмадэ</div></div>
+            <div class="modal-body">
+                <p>Тхьэмадэ (Старший) — это не просто возраст, это статус, подтвержденный мудростью. Система почитания старших учит преемственности, уважению к истории, которая персонифицирована в лице стариков.</p>
+                <div class="quote-block">«Зи нэӀуасэ жъы зымыщӀым, и пщӀэр мащӀэщ» (Кто не знает старшего, у того мало чести).</div>
+                <p>Соблюдение дистанции и порядка мест за столом приучает к пониманию своего места в социуме и ответственности за свои слова.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-7">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">ШIыхьаф</div></div>
+            <div class="modal-body">
+                <p>Традиция взаимопомощи (ШIыхьаф) — это готовый социальный механизм. В противовес стратегии «каждый сам за себя», Хабзэ учит: «Узел, завязанный общиной, не развяжется».</p>
+                <p>Готовность прийти на помощь в любом деле к человеку, который обязательно ответит тем же добрым поступком — это практическое проявление любви к народу и своей малой Родине.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-8">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header"><div class="modal-title">Гостеприимство</div></div>
+            <div class="modal-body">
+                <p>Обычай «Пщыхьэщхьэ гуапэ» (Добрый вечер) олицетворяет традицию гостеприимства. Это открытость миру при сохранении своего внутреннего дома.</p>
+                <p>Гость в доме адыга был неприкосновенен. Это учит толерантности и уважению к другим народам, что является основой стабильности.</p>
+                <p>Также Хабзэ регулирует отношение к пространству: истинный адыг не бросит мусор на землю предков и не осквернит родник — в этом проявляется прикладной патриотизм.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Наследие Черкесов. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cards = document.querySelectorAll('.rule-card');
+        const overlays = document.querySelectorAll('.modal-overlay');
+        const closeBtns = document.querySelectorAll('.modal-close');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal');
+                document.getElementById(modalId).classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.closest('.modal-overlay').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        overlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal-overlay.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
