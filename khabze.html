@@ -29,6 +29,15 @@
             overflow-x: hidden;
         }
 
+        /* --- ФИКС ДЛЯ МОБИЛОК --- */
+        @media (max-width: 768px) {
+            body {
+                /* Эта цифра сдвинет весь контент вниз из-под шапки. 
+                   Если шапка шире — просто поменяй 80px на 100px или 120px */
+                padding-top: 80px; 
+            }
+        }
+
         .ethnic-pattern {
             background-image: radial-gradient(var(--surface-light) 1px, transparent 0);
             background-size: 24px 24px;
